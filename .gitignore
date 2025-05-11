@@ -1,4 +1,5 @@
 # Mevcut içerik
+.env
 logs
 *.log
 npm-debug.log*
@@ -6,13 +7,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
 node_modules
 dist
 dist-ssr
 *.local
-
-# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -23,17 +21,7 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
-
-# Yeni eklemeler
-# Google Cloud Service Account kimlik bilgisi dosyaları
-*.json  # Tüm JSON dosyalarını kapsar (geniş kapsamlı, dikkatli kullanın)
-service-account*.json  # Google Cloud servis hesabı dosyalarına özgü
-credentials*.json  # Kimlik bilgisi içeren JSON dosyaları
-# Örnek: school-chatbot-459220-b31110b23710.json gibi dosyaları kapsar
+# Hassas dosyalar için eklemeler
 school-chatbot*.json
-
-# Diğer hassas dosyalar
-*.pem  # Sertifika dosyaları
-*.key  # Özel anahtar dosyaları
-*.cert  # Sertifika dosyaları
+service-account*.json
+credentials*.json
