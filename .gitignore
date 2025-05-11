@@ -1,4 +1,4 @@
-# Logs
+# Mevcut içerik
 logs
 *.log
 npm-debug.log*
@@ -22,4 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
 .env
+
+# Yeni eklemeler
+# Google Cloud Service Account kimlik bilgisi dosyaları
+*.json  # Tüm JSON dosyalarını kapsar (geniş kapsamlı, dikkatli kullanın)
+service-account*.json  # Google Cloud servis hesabı dosyalarına özgü
+credentials*.json  # Kimlik bilgisi içeren JSON dosyaları
+# Örnek: school-chatbot-459220-b31110b23710.json gibi dosyaları kapsar
+school-chatbot*.json
+
+# Diğer hassas dosyalar
+*.pem  # Sertifika dosyaları
+*.key  # Özel anahtar dosyaları
+*.cert  # Sertifika dosyaları
