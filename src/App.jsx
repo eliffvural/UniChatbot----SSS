@@ -1,55 +1,44 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
-
-// Dialogflow bağımlılığını import et
-const dialogflow = require('@google-cloud/dialogflow');
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  const [sessionId] = useState(Math.random().toString(36).substring(7)); // Rastgele session ID
-
-  // Dialogflow ile iletişim kurma fonksiyonu
-  const sendMessageToDialogflow = async (text) => {
-    try {
-      const sessionClient = new dialogflow.SessionsClient();
-      const sessionPath = sessionClient.projectAgentSessionPath(
-        'school-chatbot-459220', // Buraya Dialogflow Proje ID’ni yaz (örneğin, school-chatbot-123456)
-        sessionId
-      );
-
-      const request = {
-        session: sessionPath,
-        queryInput: {
-          text: {
-            text: text,
-            languageCode: 'tr', // Türkçe için
-          },
-        },
-      };
-
-      const responses = await sessionClient.detectIntent(request);
-      const result = responses[0].queryResult;
-
-      return result.fulfillmentText;
-    } catch (error) {
-      console.error('Dialogflow hatası:', error);
-      return 'Üzgünüm, bir hata oluştu.';
-    }
-  };
 
   const handleSend = async () => {
     if (input.trim()) {
       const timestamp = new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
       setMessages([...messages, { text: input, sender: 'user', timestamp }]);
-      const botResponse = await sendMessageToDialogflow(input);
+      const botResponse = await sendMessageToServer(input);
       setMessages(prev => [...prev, { text: botResponse, sender: 'bot', timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) }]);
       setInput('');
     }
   };
 
+  const sendMessageToServer = async (text) => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/dialogflow', {
+        text,
+      });
+      return response.data.text;
+    } catch (error) {
+      console.error('Sunucu hatası:', error.message);
+      console.error('Hata Kodu:', error.code);
+      if (error.response) {
+        console.error('Yanıt Hatası:', error.response.data);
+        console.error('Durum Kodu:', error.response.status);
+      } else if (error.request) {
+        console.error('İstek Hatası:', error.request);
+        console.error('Hata Detayı:', error.toJSON());
+      } else {
+        console.error('Genel Hata:', error.message);
+      }
+      return 'Üzgünüm, bir hata oluştu.';
+    }
+  };
+
   useEffect(() => {
-    // Sayfa yüklendiğinde hoş geldin mesajı
     const welcomeMessage = 'Merhaba! Size nasıl yardımcı olabilirim?';
     setMessages([{ text: welcomeMessage, sender: 'bot', timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) }]);
   }, []);
