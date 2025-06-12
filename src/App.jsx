@@ -296,6 +296,33 @@ function App() {
                           ) 
                         }} 
                       />
+                      {msg.sender === "bot" && msg.text.includes("canlı desteğe bağlıyorum") && (
+                        <>
+                          <div className="support-loading">
+                            <div className="loading-dots">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                            </div>
+                            <p>Canlı destek bağlanıyor...</p>
+                          </div>
+                          <div className="contact-buttons" style={{ animationDelay: '2s' }}>
+                            <a 
+                              href="https://mail.google.com/mail/?view=cm&fs=1&to=teknoloji@cbu.edu.tr" 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="contact-button email"
+                            >
+                              <i className="fas fa-envelope"></i>
+                              E-posta ile İletişim
+                            </a>
+                            <a href="tel:+902363141010" className="contact-button phone">
+                              <i className="fas fa-phone"></i>
+                              Telefon ile İletişim
+                            </a>
+                          </div>
+                        </>
+                      )}
                       <div className="message-timestamp">{msg.timestamp}</div>
                     </div>
                   ))
