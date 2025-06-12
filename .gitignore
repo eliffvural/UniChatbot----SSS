@@ -1,0 +1,31 @@
+# Mevcut içerik
+.env
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+node_modules
+dist
+dist-ssr
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Hassas dosyalar için eklemeler
+school-chatbot*.json
+service-account*.json
+credentials*.json
+server/dialogflow-key.json"server/dialogflow-key.json.bak" 
+server/dialogflow-key.json.bak 
+"server/dialogflow-key.json" 
+"server/dialogflow-key.json" 
