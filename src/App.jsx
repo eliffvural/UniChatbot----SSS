@@ -287,7 +287,15 @@ function App() {
                       className={`message ${msg.sender === "user" ? "user-message" : "bot-message"}`}
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <div className="message-text">{msg.text}</div>
+                      <div 
+                        className="message-text"
+                        dangerouslySetInnerHTML={{ 
+                          __html: msg.text.replace(
+                            /(https?:\/\/[^\s]+)/g, 
+                            '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+                          ) 
+                        }} 
+                      />
                       <div className="message-timestamp">{msg.timestamp}</div>
                     </div>
                   ))

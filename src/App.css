@@ -789,3 +789,22 @@ body {
   background-color: #cbd5e0;
   border-radius: 50%;
 }
+
+.message-text a {
+  color: #007bff;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.message-text a:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.bot-message .message-text a {
+  color: #28a745;
+}
+
+.bot-message .message-text a:hover {
+  color: #218838;
+}
